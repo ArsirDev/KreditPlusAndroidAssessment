@@ -1,20 +1,30 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.example.kreditplusandroidassessment'
-    compileSdk 32
+    namespace Versions.namespace
+    compileSdk Versions.complerSdk
+
+    def apikeyPropertiesFile = rootProject.file("apikey.properties")
+    def apikeyProperties = new Properties()
+    apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
     defaultConfig {
-        applicationId "com.example.kreditplusandroidassessment"
-        minSdk 21
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId Versions.applicationId
+        minSdk Versions.minSdk
+        targetSdk Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(Params.String, Params.ApiKeyParam, apikeyProperties[Params.ApiKeyParam])
+        buildConfigField(Params.String, Params.BaseUrl, apikeyProperties[Params.BaseUrl])
+        buildConfigField(Params.String, Params.OriginalImageUrl, apikeyProperties[Params.OriginalImageUrl])
     }
 
     buildTypes {
@@ -34,11 +44,52 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    // Kotlin
+    implementation(KotlinLibraries.INSTANCE.coroutineCore)
+    implementation(KotlinLibraries.INSTANCE.coroutineAndroid)
+
+    // Android
+    implementation(AndroidLibraries.INSTANCE.core)
+    implementation(AndroidLibraries.INSTANCE.appcompat)
+    implementation(AndroidLibraries.INSTANCE.material)
+    implementation(AndroidLibraries.INSTANCE.constraintlayout)
+    implementation(AndroidLibraries.INSTANCE.recyclerView)
+    implementation(AndroidLibraries.INSTANCE.legacy)
+    implementation(AndroidLibraries.INSTANCE.lifecycleLiveData)
+    implementation(AndroidLibraries.INSTANCE.lifecycleViewModel)
+    implementation(AndroidLibraries.INSTANCE.lifecycleRuneTime)
+    implementation(AndroidLibraries.INSTANCE.navigationFragment)
+    implementation(AndroidLibraries.INSTANCE.navigationUi)
+    implementation(AndroidLibraries.INSTANCE.splash)
+    implementation(AndroidLibraries.INSTANCE.activity)
+    implementation(AndroidLibraries.INSTANCE.fragment)
+    implementation(AndroidLibraries.INSTANCE.dataStore)
+    implementation(AndroidLibraries.INSTANCE.roomRuntime)
+    implementation(AndroidLibraries.INSTANCE.roomKtx)
+    implementation(AndroidLibraries.INSTANCE.navFragment)
+    implementation(AndroidLibraries.INSTANCE.navUi)
+
+    // Libraries
+    implementation(Libraries.INSTANCE.koinAndroid)
+    implementation(Libraries.INSTANCE.lottie)
+    implementation(Libraries.INSTANCE.dotViewPager)
+    implementation(Libraries.INSTANCE.glide)
+    implementation(Libraries.INSTANCE.retrofit)
+    implementation(Libraries.INSTANCE.retrofitGson)
+    implementation(Libraries.INSTANCE.gson)
+    implementation(Libraries.INSTANCE.logging)
+    implementation(Libraries.INSTANCE.youtube)
+
+    // Kapt
+    kapt(Kapt.INSTANCE.roomCompiler)
+    kapt(Kapt.INSTANCE.glideCompiler)
+    kapt(Kapt.INSTANCE.lifecycleCompiler)
+
+    // AnnotationProcessor
+    annotationProcessor(AnnotationProcessor.INSTANCE.roomCompiler)
+
+    // TestLibraries
+    testImplementation(TestLibraries.INSTANCE.junit)
+    androidTestImplementation(TestLibraries.INSTANCE.extJunit)
+    androidTestImplementation(TestLibraries.INSTANCE.espresso)
 }
