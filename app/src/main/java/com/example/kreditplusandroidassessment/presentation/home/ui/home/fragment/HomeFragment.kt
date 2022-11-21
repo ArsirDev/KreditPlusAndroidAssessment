@@ -1,5 +1,6 @@
 package com.example.kreditplusandroidassessment.presentation.home.ui.home.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kreditplusandroidassessment.R
 import com.example.kreditplusandroidassessment.databinding.FragmentHomeBinding
 import com.example.kreditplusandroidassessment.domain.adapter.nowplaying.NowPlayingAdapter
 import com.example.kreditplusandroidassessment.domain.adapter.popular.PopularAdapter
 import com.example.kreditplusandroidassessment.domain.adapter.upcoming.UpcomingAdapter
+import com.example.kreditplusandroidassessment.presentation.detail.activity.DetailMovieActivity
 import com.example.kreditplusandroidassessment.presentation.home.ui.home.viewmodel.HomeViewModel
+import com.example.kreditplusandroidassessment.util.*
+import com.example.kreditplusandroidassessment.util.Extended.ID
 import com.example.kreditplusandroidassessment.util.MESSAGE.STATUS_ERROR
-import com.example.kreditplusandroidassessment.util.MarginItemDecorationHorizontal
-import com.example.kreditplusandroidassessment.util.removeView
-import com.example.kreditplusandroidassessment.util.showView
-import com.example.kreditplusandroidassessment.util.snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -55,6 +56,25 @@ class HomeFragment : Fragment() {
       super.onViewCreated(view, savedInstanceState)
       initAdapter()
       initLaunch()
+      initView()
+   }
+
+   private fun initView() {
+      binding.tvNowPlayingViewAll?.underline()
+      binding.tvUpcomingViewAll.underline()
+      binding.tvPopularViewAll.underline()
+
+      binding.tvNowPlayingViewAll?.setOnClickListener { view ->
+         view.findNavController().navigate(R.id.nav_view_all_upcoming)
+      }
+
+      binding.tvUpcomingViewAll.setOnClickListener { view ->
+         view.findNavController().navigate(R.id.nav_view_all_upcoming)
+      }
+
+      binding.tvPopularViewAll.setOnClickListener { view ->
+         view.findNavController().navigate(R.id.nav_view_all_popular)
+      }
    }
 
    private fun initLaunch() {
@@ -92,7 +112,7 @@ class HomeFragment : Fragment() {
                snackbar(binding.root, "Id Movie tidak ditemukan", STATUS_ERROR)
                return@setOnItemClickListener
             }
-//            startActivity(Intent(requireContext(), DetailActivity::class.java).putExtra(ID, id))
+            startActivity(Intent(requireContext(), DetailMovieActivity::class.java).putExtra(ID, id))
          }
       }
 
@@ -109,7 +129,7 @@ class HomeFragment : Fragment() {
                snackbar(binding.root, "Id Movie tidak ditemukan", STATUS_ERROR)
                return@setOnItemClickListener
             }
-//            startActivity(Intent(requireContext(), DetailActivity::class.java).putExtra(ID, id))
+            startActivity(Intent(requireContext(), DetailMovieActivity::class.java).putExtra(ID, id))
          }
       }
 
@@ -126,7 +146,7 @@ class HomeFragment : Fragment() {
                snackbar(binding.root, "Id Movie tidak ditemukan", STATUS_ERROR)
                return@setOnItemClickListener
             }
-//            startActivity(Intent(requireContext(), DetailActivity::class.java).putExtra(ID, id))
+            startActivity(Intent(requireContext(), DetailMovieActivity::class.java).putExtra(ID, id))
          }
       }
    }

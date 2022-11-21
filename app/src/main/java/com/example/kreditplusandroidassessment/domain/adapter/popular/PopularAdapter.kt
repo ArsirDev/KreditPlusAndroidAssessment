@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kreditplusandroidassessment.databinding.MovieItemLayoutBinding
+import com.example.kreditplusandroidassessment.domain.model.NowPlaying
 import com.example.kreditplusandroidassessment.domain.model.Popular
 import com.example.kreditplusandroidassessment.util.setOnClickListenerWithDebounce
 
-class PopularAdapter : RecyclerView.Adapter<PopularViewHolder>() {
+class PopularAdapter: RecyclerView.Adapter<PopularViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Popular>() {
         override fun areItemsTheSame(oldItem: Popular, newItem: Popular): Boolean {
@@ -24,11 +25,7 @@ class PopularAdapter : RecyclerView.Adapter<PopularViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-        return PopularViewHolder(
-            MovieItemLayoutBinding.inflate(
-                LayoutInflater.from(parent.context)
-            )
-        )
+        return PopularViewHolder(MovieItemLayoutBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {

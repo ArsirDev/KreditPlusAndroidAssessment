@@ -1,9 +1,12 @@
 package com.example.kreditplusandroidassessment.data.repository.remote
 
+import PopularResponse
+import UpcomingResponse
 import android.util.Log
 import androidx.room.withTransaction
 import com.example.kreditplusandroidassessment.data.local.MovieDatabase
 import com.example.kreditplusandroidassessment.data.remote.api.ApiInterface
+import com.example.kreditplusandroidassessment.data.remote.dto.*
 import com.example.kreditplusandroidassessment.domain.model.NowPlaying
 import com.example.kreditplusandroidassessment.domain.model.Popular
 import com.example.kreditplusandroidassessment.domain.model.Upcoming
@@ -73,32 +76,126 @@ class RemoteMovieRepositoryImpl(
         }
     )
 
-    override fun getAllViewUpcomingMovie(page: Int, language: String): Flow<Result<Upcoming>> = flow {
+    override fun getAllViewNowPlayingMovie(
+        page: Int,
+        language: String
+    ): Flow<Result<NowPlayingResponse>> = flow {
         emit(Result.Loading())
 
-        val result = service.getUpcomingMovies(page, language)
+        val result = service.getNowPlayingMovie(page, language)
 
         if (result.isSuccessful) {
-            result.body()?.toUpcomingList()?.let { response ->
-                response.map { upcoming ->
-                    emit(Result.Success(upcoming))
-                }
+            result.body()?.let { response ->
+                emit(Result.Success(response))
             }
         } else {
             emit(Result.Error(message = "${result.code()} ${result.message()}"))
         }
     }
 
-    override fun getAllViewPopularMovie(page: Int, language: String): Flow<Result<Popular>> = flow {
+    override fun getAllViewUpcomingMovie(page: Int, language: String): Flow<Result<UpcomingResponse>> = flow {
+        emit(Result.Loading())
+
+        val result = service.getUpcomingMovies(page, language)
+
+        if (result.isSuccessful) {
+            result.body()?.let { response ->
+                emit(Result.Success(response))
+            }
+        } else {
+            emit(Result.Error(message = "${result.code()} ${result.message()}"))
+        }
+    }
+
+    override fun getAllViewPopularMovie(page: Int, language: String): Flow<Result<PopularResponse>> = flow {
         emit(Result.Loading())
 
         val result = service.getPopularMovies(page, language)
 
         if (result.isSuccessful) {
-            result.body()?.toPopularList()?.let { response ->
-                response.map { popular ->
-                    emit(Result.Success(popular))
-                }
+            result.body()?.let { response ->
+                emit(Result.Success(response))
+            }
+        } else {
+            emit(Result.Error(message = "${result.code()} ${result.message()}"))
+        }
+    }
+
+    override fun getGenre(): Flow<Result<GenreResponse>> = flow {
+        emit(Result.Loading())
+
+        val result = service.getGenreMovies()
+
+        if (result.isSuccessful) {
+            result.body()?.let { response ->
+                emit(Result.Success(response))
+            }
+        } else {
+            emit(Result.Error(message = "${result.code()} ${result.message()}"))
+        }
+    }
+
+    override fun getDetailMovie(movie_id: Int): Flow<Result<DetailResponse>> = flow {
+        emit(Result.Loading())
+
+        val result = service.getDetailMovies(movie_id)
+
+        if (result.isSuccessful) {
+            result.body()?.let { response ->
+                emit(Result.Success(response))
+            }
+        } else {
+            emit(Result.Error(message = "${result.code()} ${result.message()}"))
+        }
+    }
+
+    override fun getVideoMovie(movie_id: Int): Flow<Result<VideoResponse>> = flow {
+        emit(Result.Loading())
+
+        val result = service.getVideoMovies(movie_id)
+
+        if (result.isSuccessful) {
+            result.body()?.let { response ->
+                emit(Result.Success(response))
+            }
+        } else {
+            emit(Result.Error(message = "${result.code()} ${result.message()}"))
+        }
+    }
+
+    override fun getSearchMovie(
+        query: String,
+        page: Int,
+        language: String
+    ): Flow<Result<SearchMovieResponse>> = flow {
+
+        emit(Result.Loading())
+
+        val result = service.getSearchMovies(query, page, false, language)
+
+        if (result.isSuccessful) {
+            result.body()?.let { response ->
+                emit(Result.Success(response))
+            }
+        } else {
+            emit(Result.Error(message = "${result.code()} ${result.message()}"))
+        }
+    }
+
+    override fun getDiscoverMovie(
+        with_genres: String,
+        page: Int,
+        include_adult: Boolean,
+        language: String
+    ): Flow<Result<DiscoverMovieResponse>> = flow {
+
+        emit(Result.Loading())
+
+        val result = service.getDiscoverMovies(with_genres, page, false, language)
+
+        if (result.isSuccessful) {
+            result.body()?.let { response ->
+                emit(Result.Success(response))
             }
         } else {
             emit(Result.Error(message = "${result.code()} ${result.message()}"))

@@ -17,12 +17,20 @@
         android:theme="@style/Theme.KreditPlusAndroidAssessment"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.detail.activity.DetailMovieActivity"
+            android:exported="false"
+            android:label="@string/title_activity_detail_movie"
+            android:theme="@style/Theme.KreditPlusAndroidAssessment.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:resizeableActivity="true"
-            android:theme="@style/Theme.KreditPlusAndroidAssessment.NoActionBar"
-            >
+            android:theme="@style/Theme.KreditPlusAndroidAssessment.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

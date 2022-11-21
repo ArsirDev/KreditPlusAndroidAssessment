@@ -3,7 +3,7 @@ package com.example.kreditplusandroidassessment.presentation.home.ui.home.viewmo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kreditplusandroidassessment.domain.repository.remote.RemoteMovieRepository
-import com.example.kreditplusandroidassessment.presentation.home.ui.home.State.HomeState
+import com.example.kreditplusandroidassessment.presentation.home.ui.home.state.HomeState
 import com.example.kreditplusandroidassessment.util.Result
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow

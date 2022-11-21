@@ -17,7 +17,9 @@ class MovieApplication: Application() {
                 remote,
                 splash,
                 slider,
-                home
+                home,
+                detail,
+                viewAll
             )
         }
     }

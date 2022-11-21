@@ -9,6 +9,7 @@ import com.example.kreditplusandroidassessment.util.MovieEndPoint.GENRE_MOVIE
 import com.example.kreditplusandroidassessment.util.MovieEndPoint.NOW_PLAYING_MOVIE
 import com.example.kreditplusandroidassessment.util.MovieEndPoint.POPULAR_MOVIE
 import com.example.kreditplusandroidassessment.util.MovieEndPoint.SEARCH_MOVIE
+import com.example.kreditplusandroidassessment.util.MovieEndPoint.SIMILAR_MOVIE
 import com.example.kreditplusandroidassessment.util.MovieEndPoint.UPCOMING_MOVIE
 import com.example.kreditplusandroidassessment.util.MovieEndPoint.VIDEO_MOVIE
 import com.example.kreditplusandroidassessment.util.MovieKeyConstant.INCLUDE_ADULT
@@ -44,6 +45,11 @@ interface ApiInterface {
 
     @GET(DETAIL_MOVIE)
     suspend fun getDetailMovies(
+        @Path("movie_id") movie_id: Int
+    ): Response<DetailResponse>
+
+    @GET(SIMILAR_MOVIE)
+    suspend fun getSimilarMovies(
         @Path("movie_id") movie_id: Int
     ): Response<DetailResponse>
 

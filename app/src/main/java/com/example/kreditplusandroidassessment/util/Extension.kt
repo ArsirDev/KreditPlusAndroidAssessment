@@ -7,6 +7,8 @@ import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.kreditplusandroidassessment.BuildConfig.ORIGINAL_IMAGE_URL
@@ -66,12 +68,23 @@ fun ImageView.loadImage(imageUrl: String, roundedValue: Int = 24) {
         .into(this)
 }
 
-fun String.createImageUrl(): String {
-    return ORIGINAL_IMAGE_URL + this
-}
-
 fun TextView.underline() {
     paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
+}
+
+fun isLastVisible(rv: RecyclerView, shouldFindLastCompletelyVisible: Boolean = true): Boolean {
+    val layoutManager = rv.layoutManager as LinearLayoutManager
+    val pos = if (shouldFindLastCompletelyVisible) {
+        layoutManager.findLastCompletelyVisibleItemPosition()
+    } else {
+        layoutManager.findFirstVisibleItemPosition()
+    }
+    val numItems: Int = rv.adapter?.itemCount ?: 0
+    return pos >= numItems - 1
+}
+
+fun String.createImageUrl(): String {
+    return ORIGINAL_IMAGE_URL + this
 }
 
 fun View.showView() {

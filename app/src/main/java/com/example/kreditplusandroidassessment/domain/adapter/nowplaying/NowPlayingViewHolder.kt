@@ -6,7 +6,7 @@ import com.example.kreditplusandroidassessment.domain.model.NowPlaying
 import com.example.kreditplusandroidassessment.util.dateConverter
 import com.example.kreditplusandroidassessment.util.loadImage
 
-class NowPlayingViewHolder(
+class ViewAllNowPlayingViewHolder(
     val binding: MovieItemLayoutBinding
 ): RecyclerView.ViewHolder(
     binding.root

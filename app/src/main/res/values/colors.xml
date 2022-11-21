@@ -17,5 +17,6 @@
     <color name="green_color">#6DC554</color>
     <color name="transparent">#99000000</color>
     <color name="transparant">#99000000</color>
+    <color name="text_trasparent">#80000000</color>
     <color name="text_transparent">#80000000</color>
 </resources>

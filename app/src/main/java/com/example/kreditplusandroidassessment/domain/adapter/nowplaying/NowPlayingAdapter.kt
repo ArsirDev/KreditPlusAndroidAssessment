@@ -9,7 +9,7 @@ import com.example.kreditplusandroidassessment.databinding.MovieItemLayoutBindin
 import com.example.kreditplusandroidassessment.domain.model.NowPlaying
 import com.example.kreditplusandroidassessment.util.setOnClickListenerWithDebounce
 
-class NowPlayingAdapter: RecyclerView.Adapter<NowPlayingViewHolder>() {
+class NowPlayingAdapter: RecyclerView.Adapter<ViewAllNowPlayingViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<NowPlaying>() {
         override fun areItemsTheSame(oldItem: NowPlaying, newItem: NowPlaying): Boolean {
@@ -23,11 +23,11 @@ class NowPlayingAdapter: RecyclerView.Adapter<NowPlayingViewHolder>() {
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder {
-        return NowPlayingViewHolder(MovieItemLayoutBinding.inflate(LayoutInflater.from(parent.context)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewAllNowPlayingViewHolder {
+        return ViewAllNowPlayingViewHolder(MovieItemLayoutBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: NowPlayingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewAllNowPlayingViewHolder, position: Int) {
         holder.apply {
             bind(differ.currentList[position].also { item ->
                 itemView.setOnClickListenerWithDebounce {

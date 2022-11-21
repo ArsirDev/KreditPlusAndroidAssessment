@@ -1,4 +1,4 @@
-package com.example.kreditplusandroidassessment.presentation.home.ui.home.State
+package com.example.kreditplusandroidassessment.presentation.home.ui.home.state
 
 import com.example.kreditplusandroidassessment.domain.model.NowPlaying
 import com.example.kreditplusandroidassessment.domain.model.Popular
