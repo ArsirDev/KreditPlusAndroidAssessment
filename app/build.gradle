@@ -40,9 +40,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
+
+    // Default Libraries
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Kotlin
     implementation(KotlinLibraries.INSTANCE.coroutineCore)
@@ -50,9 +58,6 @@ dependencies {
 
     // Android
     implementation(AndroidLibraries.INSTANCE.core)
-    implementation(AndroidLibraries.INSTANCE.appcompat)
-    implementation(AndroidLibraries.INSTANCE.material)
-    implementation(AndroidLibraries.INSTANCE.constraintlayout)
     implementation(AndroidLibraries.INSTANCE.recyclerView)
     implementation(AndroidLibraries.INSTANCE.legacy)
     implementation(AndroidLibraries.INSTANCE.lifecycleLiveData)
@@ -79,6 +84,11 @@ dependencies {
     implementation(Libraries.INSTANCE.gson)
     implementation(Libraries.INSTANCE.logging)
     implementation(Libraries.INSTANCE.youtube)
+//    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+//    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+//    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+//    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+//    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Kapt
     kapt(Kapt.INSTANCE.roomCompiler)

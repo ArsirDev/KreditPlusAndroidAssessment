@@ -55,18 +55,6 @@ object Versions {
      */
     const val core = "1.8.0"
     /**
-     * @param type variable of [appcompat]
-     */
-    const val appcompat = "1.5.1"
-    /**
-     * @param type variable of [material]
-     */
-    const val material = "1.7.0"
-    /**
-     * @param type variable of [constraintlayout]
-     */
-    const val constraintlayout = "2.1.4"
-    /**
      * @param type variable of [junit]
      */
     const val junit = "4.13.2"
@@ -177,18 +165,6 @@ object AndroidLibraries {
      * @param type dependecies of type [core]
      */
     val core by lazy { "androidx.core:core-ktx:${Versions.core}" }
-    /**
-     * @param type dependecies of type [appcompat]
-     */
-    val appcompat by lazy { "androidx.appcompat:appcompat:${Versions.appcompat}" }
-    /**
-     * @param type dependecies of type [material]
-     */
-    val material by lazy { "com.google.android.material:material:${Versions.material}" }
-    /**
-     * @param type dependecies of type [constraintlayout]
-     */
-    val constraintlayout by lazy { "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}" }
     /**
      * @param type dependecies of type [recyclerView]
      */
